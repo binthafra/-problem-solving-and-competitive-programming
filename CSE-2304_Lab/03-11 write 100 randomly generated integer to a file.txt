@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <math.h>
+#include <time.h>
+
+int main()
+{
+    FILE *fp;
+    fp =fopen ("boundary.dat","w");
+    srand((unsigned)time(0));
+    double xmax,ymax,zmax;
+    double x,y,z;
+    int i=0;
+    xmax = 4000;
+    ymax =4000;
+    zmax =4000;
+
+    do 
+    {
+        i=0;
+        i++;
+        x=(rand()%4000 - 2000);
+        y=(rand()%4000 -2000);
+        z=1-x-y;
+        printf("%.2f %.2f %.2f \n ", x,y,z);
+        fprintf(fp, "%.2f %.2f %.2f \n ", x,y,z);
+    }
+    while ((abs(z)<=zmax) && (i<15));
+        fclose(fp);
+
+        return;
+    }
+}

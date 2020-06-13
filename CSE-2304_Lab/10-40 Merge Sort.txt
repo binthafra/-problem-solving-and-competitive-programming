@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<conio.h>
+
+void merge_split(int a[],int first,int last);
+void merge(int a[],int f1,int l1,int f2,int l2);
+int a[25],b[25];
+
+void main()
+{
+ int i,n;
+ clrscr();
+ printf("\n\nMERGE SORT");
+ printf("\n\n*********");
+ printf("\n\nEnter the limit : ");
+ scanf("%d",&n);
+ printf("\nEnter the elements\n");
+ for(i=0;i<n;i++)
+  scanf("%d",&a[i]);
+ merge_split(a,0,n-1);
+ printf("\n\nSorted list : ");
+ for(i=0;i<n;i++)
+  printf("\n %d",a[i]);
+ getch();
+}
+
+void merge_split(int a[],int first,int last)
+{
+ int mid;
+ if(first<last)
+ {
+  mid=(first+last)/2;
+  merge_split(a,first,mid);
+  merge_split(a,mid+1,last);
+  merge(a,first,mid,mid+1,last);
+ }
+}
+
+void merge(int a[],int f1,int l1,int f2,int l2)
+{
+ int i,j,k=0;
+ i=f1;
+ j=f2;
+ while(i<=l1 && j<=l2)
+ {
+  if(a[i]<a[j])
+   b[k]=a[i++];
+  else
+   b[k]=a[j++];
+  k++;
+ }
+ while(i<=l1)
+  b[k++]=a[i++];
+ while(j<=l2)
+  b[k++]=a[j++];
+ i=f1;
+ j=0;
+ while(i<=l2 && j<k)
+  a[i++]=b[j++];
+}
+
+
